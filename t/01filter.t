@@ -28,4 +28,6 @@ $p->parse_string(<<EOT);
 <foo/>
 EOT
 
+print "OUTPUT: $output\n";
+
 ok($output);

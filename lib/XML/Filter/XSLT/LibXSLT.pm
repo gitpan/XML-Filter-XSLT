@@ -1,4 +1,4 @@
-# $Id: LibXSLT.pm,v 1.2 2001/12/19 13:59:13 matt Exp $
+# $Id: LibXSLT.pm,v 1.3 2002/01/22 19:24:17 matt Exp $
 
 package XML::Filter::XSLT::LibXSLT;
 use strict;
@@ -53,6 +53,13 @@ sub end_document {
     # serialize to Handler and co.
     my $parser = XML::LibXML::SAX::Parser->new(%$self);
     $parser->generate($results);
+}
+
+sub set_handler {
+    my $self = shift;
+    $self->{Handler} = shift;
+    $self->{Parser}->set_handler( $self->{Handler} )
+        if $self->{Parser};
 }
 
 1;

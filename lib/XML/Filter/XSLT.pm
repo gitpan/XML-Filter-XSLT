@@ -1,10 +1,10 @@
-# $Id: XSLT.pm,v 1.1.1.1 2001/12/18 22:12:40 matt Exp $
+# $Id: XSLT.pm,v 1.2 2002/01/22 19:33:21 matt Exp $
 
 package XML::Filter::XSLT;
 use strict;
 use vars qw($VERSION);
 
-$VERSION = 0.01;
+$VERSION = 0.02;
 
 sub new {
     my $class = shift;
