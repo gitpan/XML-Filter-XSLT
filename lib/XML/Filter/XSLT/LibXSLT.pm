@@ -1,4 +1,4 @@
-# $Id: LibXSLT.pm,v 1.3 2002/01/22 19:24:17 matt Exp $
+# $Id: LibXSLT.pm,v 1.4 2002/02/25 13:08:55 matt Exp $
 
 package XML::Filter::XSLT::LibXSLT;
 use strict;
@@ -14,6 +14,19 @@ sub new {
     my $class = shift;
     my %params = @_;
     my $self = bless \%params, $class;
+    return $self;
+}
+
+sub set_stylesheet_uri {
+    # <ubu> hey look, now it does what the synopsis says it can.. ;->
+    my $self = shift;
+    my $uri = shift;
+    $self->{Source}{SystemId} = $uri;
+}
+
+sub start_document {
+    my $self = shift;
+
     # copy logic from XML::SAX::Base for getting "something" out of Source key.
     # parse stylesheet
     # store
@@ -38,8 +51,8 @@ sub new {
     }
 
     $self->{StylesheetDOM} = $styledoc;
+    $self->SUPER::start_document(@_)
 
-    return $self;
 }
 
 sub end_document {
