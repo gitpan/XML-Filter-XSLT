@@ -1,0 +1,28 @@
+XML::Filter::XSLT
+=================
+
+This module implements XSLT as a SAX Filter.
+
+At the moment it only uses XML::LibXSLT as an XSLT transformer,
+but hopefully in the future we can support others too (it's
+written with that in mind).
+
+It works very simply:
+
+  my $output;
+  my $w = XML::SAX::Writer->new(Output => \$output);
+  my $f = XML::Filter::XSLT->new(
+          Handler => $w, 
+          Source => {String => $xslt});
+  my $p = XML::SAX::ParserFactory->parser(Handler => $f);
+  
+  $p->parse_uri("file:///home/htdocs/foo.xml");
+  
+  print $output;
+
+The beauty is you can stick other things in the transformation
+chain if you want, or you can make the writer ($w in the above)
+use XML::Handler::HTMLWriter if you want to write out valid
+HTML 4.0, or you can make the generator something like
+XML::Generator::DBI. The possibilities are endless.
+
